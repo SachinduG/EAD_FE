@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    tools:context=".QueueDetailsActivity">
+
+    <TextView
+        android:id="@+id/shed_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="@string/shed_name_display"
+        android:fontFamily="@font/poppins"
+        android:padding="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/shed_address_display"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/shed_address_display"
+            android:padding="30dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/shed_fuel_type"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/fuel_type"
+            android:padding="30dp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/you_in_queue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="@string/you_are_in_queue"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/shed_waiting_time_dis"
+                android:layout_width="205dp"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:text="@string/waiting_time"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/shed_waiting_time"
+                android:layout_width="205dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/waiting_time"
+                android:padding="30dp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/queue_exit_after_fuel"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:cornerRadius="30dp"
+            android:text="@string/exit_after_pump_fuel"
+            android:backgroundTint="@color/red"
+            android:padding="14dp"/>
+
+        <Button
+            android:id="@+id/queue_exit_no_fuel"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="30dp"
+            android:textColor="@color/white"
+            android:text="@string/exit_before_pump_fuel"
+            android:backgroundTint="@color/red1"
+            android:padding="14dp"/>
+    </LinearLayout>
+
+</LinearLayout>
