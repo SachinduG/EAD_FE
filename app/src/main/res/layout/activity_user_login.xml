@@ -69,6 +69,7 @@
                     android:paddingStart="20dp"
                     android:textColorHighlight="@color/cardview_dark_background"
                     android:textSize="20sp"
+                    android:textColorHint="#536DFE"
                     tools:ignore="RtlSymmetry,TextContrastCheck"
                     android:inputType="text"
                     android:importantForAutofill="no" />
@@ -85,6 +86,7 @@
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:paddingStart="20dp"
+                    android:textColorHint="#536DFE"
                     android:textColorHighlight="@color/cardview_dark_background"
                     android:textSize="20sp"
                     tools:ignore="RtlSymmetry,TextContrastCheck"
@@ -95,13 +97,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:backgroundTint="@android:color/background_dark"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@android:color/holo_green_dark"
                     android:text="@string/sign_in"
                     android:textSize="20sp"
-                    android:layout_marginTop="20dp"
                     android:textStyle="bold"
                     app:cornerRadius="20dp"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
+                    tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/already"
