@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class QueueOutActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView shed_name,shed_address_display;
+    TextView shedName, shedCity;
     Button btnHome;
 
     @Override
@@ -30,12 +30,12 @@ public class QueueOutActivity extends AppCompatActivity implements View.OnClickL
         String shedName = intent.getStringExtra("sName");
         String shedAdd = intent.getStringExtra("sAdd");
 
-        shed_name = findViewById(R.id.shed_name);
-        shed_address_display = findViewById(R.id.shed_address_display);
+        this.shedName = findViewById(R.id.shed_name);
+        shedCity = findViewById(R.id.shed_address_display);
         btnHome = findViewById(R.id.home);
 
-        shed_name.setText(shedName);
-        shed_address_display.setText(shedAdd);
+        this.shedName.setText(shedName);
+        shedCity.setText(shedAdd);
 
         btnHome.setOnClickListener(this);
     }

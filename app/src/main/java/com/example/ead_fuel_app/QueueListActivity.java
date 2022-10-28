@@ -35,15 +35,15 @@ import retrofit2.Response;
 public class QueueListActivity extends AppCompatActivity implements ShedSelectListener{
 
     SharedPreferences sharedPreferences;
-    TextInputLayout textInputLayout, textInputLayout2;
-    AutoCompleteTextView autoCompleteTextView, autoCompleteTextView2;
+    TextInputLayout textInputLayoutCity, textInputLayoutFuel;
+    AutoCompleteTextView autoCompleteTextViewCity, autoCompleteTextViewFuel;
     TextView city, fuel, select_fuel;
-    ArrayList<Shed> shedList;
+    ArrayList<Shed> shedsList;
     RecyclerView recyclerView;
     ShedRecyclerAdapter shedRecyclerAdapter;
     LinearLayout linearFuel;
-    String shedAdd;
-    String fuelT;
+    String shedCity;
+    String fuelType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,10 @@ public class QueueListActivity extends AppCompatActivity implements ShedSelectLi
 
         sharedPreferences = getSharedPreferences("Fuels", Context.MODE_PRIVATE);
 
-        textInputLayout = findViewById(R.id.textInput);
-        textInputLayout2 = findViewById(R.id.textInputType);
-        autoCompleteTextView = findViewById(R.id.autoComplete);
-        autoCompleteTextView2 = findViewById(R.id.autoCompleteType);
+        textInputLayoutCity = findViewById(R.id.textInput);
+        textInputLayoutFuel = findViewById(R.id.textInputType);
+        autoCompleteTextViewCity = findViewById(R.id.autoComplete);
+        autoCompleteTextViewFuel = findViewById(R.id.autoCompleteType);
         city = findViewById(R.id.selectedCity);
         fuel = findViewById(R.id.selectedFuel);
         select_fuel = findViewById(R.id.select_fuel);
@@ -65,29 +65,29 @@ public class QueueListActivity extends AppCompatActivity implements ShedSelectLi
 
         String [] cities = {"Colombo", "Ratnapura", "Galle"};
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(QueueListActivity.this,R.layout.dropdown_menu,cities);
-        autoCompleteTextView.setAdapter(cityAdapter);
+        autoCompleteTextViewCity.setAdapter(cityAdapter);
 
         String [] fuelType = {"Petrol","Diesel"};
         ArrayAdapter<String> fuelAdapter = new ArrayAdapter<>(QueueListActivity.this,R.layout.dropdown_menu,fuelType);
-        autoCompleteTextView2.setAdapter(fuelAdapter);
+        autoCompleteTextViewFuel.setAdapter(fuelAdapter);
 
-        autoCompleteTextView.setOnItemClickListener((adapterView, view, i, l) -> {
-            shedAdd = (String) adapterView.getItemAtPosition(i);
-            city.setText(shedAdd);
-            textInputLayout2.setVisibility(View.VISIBLE);
+        autoCompleteTextViewCity.setOnItemClickListener((adapterView, view, i, l) -> {
+            shedCity = (String) adapterView.getItemAtPosition(i);
+            city.setText(shedCity);
+            textInputLayoutFuel.setVisibility(View.VISIBLE);
             linearFuel.setVisibility(View.VISIBLE);
             select_fuel.setVisibility(View.VISIBLE);
 
             ShedService shedService = ServiceBuilder.buildService(ShedService.class);
             //get sheds by city
-            Call<ArrayList<Shed>> request = shedService.ShedsByAddress(shedAdd);
+            Call<ArrayList<Shed>> request = shedService.ShedsByAddress(shedCity);
 
             request.enqueue(new Callback<ArrayList<Shed>>() {
                 @Override
                 public void onResponse(@NonNull Call<ArrayList<Shed>> call, @NonNull Response<ArrayList<Shed>> response) {
                     if(response.isSuccessful()){
-                        shedList = response.body();
-                        shedRecyclerAdapter = new ShedRecyclerAdapter(getApplicationContext(), shedList, QueueListActivity.this);
+                        shedsList = response.body();
+                        shedRecyclerAdapter = new ShedRecyclerAdapter(getApplicationContext(), shedsList, QueueListActivity.this);
                         recyclerView.setAdapter(shedRecyclerAdapter);
 
                     }
@@ -99,17 +99,17 @@ public class QueueListActivity extends AppCompatActivity implements ShedSelectLi
                 }
             });
         });
-        autoCompleteTextView2.setOnItemClickListener((adapterView, view, i, l) -> {
-            fuelT = (String)adapterView.getItemAtPosition(i);
-            fuel.setText(fuelT);
+        autoCompleteTextViewFuel.setOnItemClickListener((adapterView, view, i, l) -> {
+            this.fuelType = (String)adapterView.getItemAtPosition(i);
+            fuel.setText(this.fuelType);
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("FuelType", fuelT);
+            editor.putString("FuelType", this.fuelType);
             editor.apply();
 
             ShedService shedService = ServiceBuilder.buildService(ShedService.class);
             //get the shed with shortest queue by city and fuel type
-            Call<Shed> request2 = shedService.ShortestQueueByAddressAndType(shedAdd,fuelT);
+            Call<Shed> request2 = shedService.ShortestQueueByAddressAndType(shedCity, this.fuelType);
 
             request2.enqueue(new Callback<Shed>() {
                 @Override
@@ -146,7 +146,7 @@ public class QueueListActivity extends AppCompatActivity implements ShedSelectLi
         intent.putExtra("petrolfinish", shed.getPetrolFinishTime());
         intent.putExtra("dieselqueue", shed.getDieselQueueLength());
         intent.putExtra("petrolqueue", shed.getPetrolQueueLength());
-        intent.putExtra("fType",fuelT);
+        intent.putExtra("fType", fuelType);
         startActivity(intent);
     }
 }

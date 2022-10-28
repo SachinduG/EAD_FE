@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ShedViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView shedName,shedAddress;
-    public CardView shedCardView;
+    public TextView shedName, shedCity;
+    public CardView shedCard;
 
     public ShedViewHolder(@NonNull View itemView) {
         super(itemView);
 
         shedName = itemView.findViewById(R.id.shedName);
-        shedAddress = itemView.findViewById(R.id.shedAddress);
-        shedCardView = itemView.findViewById(R.id.shedCardView);
+        shedCity = itemView.findViewById(R.id.shedAddress);
+        shedCard = itemView.findViewById(R.id.shedCardView);
     }
 }

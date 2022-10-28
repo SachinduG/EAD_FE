@@ -17,22 +17,22 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button user_register, shed_register, user_sign_in, shed_sign_in;
+    Button userRegister, shedRegister, userLogin, shedLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
 
-        user_register = findViewById(R.id.welcome_user_register);
-        shed_register = findViewById(R.id.welcome_shed_register);
-        user_sign_in = findViewById(R.id.welcome_user_sign_in);
-        shed_sign_in = findViewById(R.id.shed_sign_in);
+        userRegister = findViewById(R.id.welcome_user_register);
+        shedRegister = findViewById(R.id.welcome_shed_register);
+        userLogin = findViewById(R.id.welcome_user_sign_in);
+        shedLogin = findViewById(R.id.shed_sign_in);
 
-        user_register.setOnClickListener(this);
-        shed_register.setOnClickListener(this);
-        user_sign_in.setOnClickListener(this);
-        shed_sign_in.setOnClickListener(this);
+        userRegister.setOnClickListener(this);
+        shedRegister.setOnClickListener(this);
+        userLogin.setOnClickListener(this);
+        shedLogin.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

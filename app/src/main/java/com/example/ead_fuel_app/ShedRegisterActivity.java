@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class ShedRegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText shed_username, reg_no, shed_add, password, confirm_password;
+    private EditText shedName, regNo, shedCity, psd, psd1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,11 @@ public class ShedRegisterActivity extends AppCompatActivity implements View.OnCl
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_shed_register);
 
-        shed_username = findViewById(R.id.shed_username);
-        reg_no = findViewById(R.id.reg_no);
-        shed_add = findViewById(R.id.shed_add);
-        password = findViewById(R.id.password);
-        confirm_password = findViewById(R.id.confirm_password);
+        shedName = findViewById(R.id.shed_username);
+        regNo = findViewById(R.id.reg_no);
+        shedCity = findViewById(R.id.shed_add);
+        psd = findViewById(R.id.password);
+        psd1 = findViewById(R.id.confirm_password);
 
         TextView already = findViewById(R.id.already);
         already.setOnClickListener(this);
@@ -58,30 +58,30 @@ public class ShedRegisterActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(getApplicationContext(), ShedLoginActivity.class));
                 break;
             case R.id.signup:
-                String shedName = shed_username.getText().toString().trim();
-                String regNo = reg_no.getText().toString().trim();
-                String add = shed_add.getText().toString().trim();
-                String pass = password.getText().toString().trim();
-                String repass = confirm_password.getText().toString().trim();
+                String shedName = this.shedName.getText().toString().trim();
+                String regNo = this.regNo.getText().toString().trim();
+                String add = shedCity.getText().toString().trim();
+                String pass = psd.getText().toString().trim();
+                String repass = psd1.getText().toString().trim();
 
                 if (regNo.isEmpty()) {
-                    reg_no.setError("Registration No cannot be empty!");
+                    this.regNo.setError("Registration No cannot be empty!");
                 }
                 else if (shedName.isEmpty()) {
-                    shed_username.setError("Name field cannot be empty!");
+                    this.shedName.setError("Name field cannot be empty!");
                 }
                 else if (add.isEmpty()) {
-                    shed_add.setError("City field cannot be empty!");
+                    shedCity.setError("City field cannot be empty!");
                 }
                 else if (pass.isEmpty()) {
-                    password.setError("Password field cannot be empty!");
+                    psd.setError("Password field cannot be empty!");
                 }
                 else if (!pass.equals(repass)) {
-                    password.setError("Passwords are not matched!");
-                    confirm_password.setError("Passwords are not matched!");
+                    psd.setError("Passwords are not matched!");
+                    psd1.setError("Passwords are not matched!");
                 }
                 else if (pass.length() < 8 || pass.length() > 20) {
-                    password.setError("Password length should be between 8 and 20!");
+                    psd.setError("Password length should be between 8 and 20!");
                 }
                 else {
                     Shed shed = new Shed(regNo,shedName,add,pass,null,null,false,0,null,null,false,0);

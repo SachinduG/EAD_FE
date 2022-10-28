@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 public class UserLoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText nic,password;
+    private EditText nicNo, psd;
     private ProgressBar progressBar;
     SharedPreferences sharedPreferences;
 
@@ -44,8 +44,8 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
 
         sharedPreferences = getSharedPreferences("Fuels", Context.MODE_PRIVATE);
 
-        nic = findViewById(R.id.nic);
-        password = findViewById(R.id.password);
+        nicNo = findViewById(R.id.nic);
+        psd = findViewById(R.id.password);
 
         Button signin = findViewById(R.id.signin);
         signin.setOnClickListener(this);
@@ -67,8 +67,8 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
             case R.id.signin:
                 progressBar.setVisibility(View.VISIBLE);
 
-                String Nic = nic.getText().toString();
-                String Password = password.getText().toString();
+                String Nic = nicNo.getText().toString();
+                String Password = psd.getText().toString();
 
                 UserService userService = ServiceBuilder.buildService(UserService.class);
                 //login user with nic number and password
@@ -82,9 +82,9 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
                         progressBar.setVisibility(View.INVISIBLE);
 
                         if (Nic.isEmpty()) {
-                            nic.setError("NIC number field cannot be empty!");
+                            nicNo.setError("NIC number field cannot be empty!");
                         }else if (Password.isEmpty()) {
-                            password.setError("Password field cannot be empty!");
+                            psd.setError("Password field cannot be empty!");
                         }else if(!response.isSuccessful()){
                             Toast.makeText(UserLoginActivity.this, "NIC number or Password Incorrect!", Toast.LENGTH_SHORT).show();
                         } else {

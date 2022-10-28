@@ -31,8 +31,8 @@ import retrofit2.Response;
 public class QueueInActivity extends AppCompatActivity implements View.OnClickListener {
 
     SharedPreferences sharedPreferences;
-    TextView shed_waiting_time,shed_name,shed_address_display,shed_fuel_type;
-    Button queue_exit_after_fuel,queue_exit_no_fuel;
+    TextView waitingTime, shedName, shedCity, fuelType;
+    Button exitAfter, exitBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +42,16 @@ public class QueueInActivity extends AppCompatActivity implements View.OnClickLi
 
         sharedPreferences = getSharedPreferences("Fuels", Context.MODE_PRIVATE);
 
-        shed_waiting_time = findViewById(R.id.shed_waiting_time);
-        shed_name = findViewById(R.id.shed_name);
-        shed_address_display = findViewById(R.id.shed_address_display);
-        shed_fuel_type = findViewById(R.id.shed_fuel_type);
+        waitingTime = findViewById(R.id.shed_waiting_time);
+        shedName = findViewById(R.id.shed_name);
+        shedCity = findViewById(R.id.shed_address_display);
+        fuelType = findViewById(R.id.shed_fuel_type);
 
-        queue_exit_after_fuel = findViewById(R.id.queue_exit_after_fuel);
-        queue_exit_no_fuel = findViewById(R.id.queue_exit_no_fuel);
+        exitAfter = findViewById(R.id.queue_exit_after_fuel);
+        exitBefore = findViewById(R.id.queue_exit_no_fuel);
 
-        queue_exit_after_fuel.setOnClickListener(this);
-        queue_exit_no_fuel.setOnClickListener(this);
+        exitAfter.setOnClickListener(this);
+        exitBefore.setOnClickListener(this);
 
         Intent intent = getIntent();
         String shedregno = intent.getStringExtra("shedRegNo");
@@ -59,32 +59,30 @@ public class QueueInActivity extends AppCompatActivity implements View.OnClickLi
         String shedName = intent.getStringExtra("shedNam");
         String shedAdd = intent.getStringExtra("shedAdd");
 
-        shed_name.setText(shedName);
-        shed_address_display.setText(shedAdd);
-        shed_fuel_type.setText(fType);
+        this.shedName.setText(shedName);
+        shedCity.setText(shedAdd);
+        fuelType.setText(fType);
 
         getAvergeWaitingTime(shedregno, fType);
 
     }
 
-    // get average time for each selected queue
     private void getAvergeWaitingTime(String shedregno, String fType) {
         QueueService queueService = ServiceBuilder.buildService(QueueService.class);
-
+        // get average waiting time of shed using shed Id and fuel type
         Call<Long> request = queueService.AvgWaitingTimeByIdType(shedregno, fType);
 
         request.enqueue(new Callback<Long>() {
             @Override
             public void onResponse(@NonNull Call<Long> call, @NonNull Response<Long> response) {
                 if(response.isSuccessful()){
-                    shed_waiting_time.setText(String.valueOf(response.body()));
+                    waitingTime.setText(String.valueOf(response.body()));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Long> call, @NonNull Throwable t) {
                 Toast.makeText(QueueInActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
     }
@@ -94,13 +92,13 @@ public class QueueInActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.queue_exit_after_fuel:
-                String queueId = sharedPreferences.getString("QueueID", "No");
+                String queueId1 = sharedPreferences.getString("QueueID", "No");
 
-                QueueService queueService = ServiceBuilder.buildService(QueueService.class);
-                //user leave from the queue
-                Call<Queue> request = queueService.leaveQueue(queueId);
+                QueueService queueService1 = ServiceBuilder.buildService(QueueService.class);
+                //user leave from the queue after pumping fuel
+                Call<Queue> call1 = queueService1.leaveQueue(queueId1);
 
-                request.enqueue(new Callback<Queue>() {
+                call1.enqueue(new Callback<Queue>() {
                     @Override
                     public void onResponse(@NonNull Call<Queue> call, @NonNull Response<Queue> response) {
                         Toast.makeText(QueueInActivity.this, "You have left the queue!", Toast.LENGTH_SHORT).show();
@@ -121,7 +119,31 @@ public class QueueInActivity extends AppCompatActivity implements View.OnClickLi
                 });
                 break;
             case R.id.queue_exit_no_fuel:
-                startActivity(new Intent(getApplicationContext(), QueueOutActivity.class));
+                String queueId2 = sharedPreferences.getString("QueueID", "No");
+
+                QueueService queueService2 = ServiceBuilder.buildService(QueueService.class);
+                //user leave from the queue before pumping fuel
+                Call<Queue> call2 = queueService2.leaveEarlyQueue(queueId2);
+
+                call2.enqueue(new Callback<Queue>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Queue> call, @NonNull Response<Queue> response) {
+                        Toast.makeText(QueueInActivity.this, "You have left the queue before pump fuel!", Toast.LENGTH_SHORT).show();
+                        Intent intent = getIntent();
+                        String shedName = intent.getStringExtra("shedNam");
+                        String shedAdd = intent.getStringExtra("shedAdd");
+                        Intent intent2 = new Intent(getApplicationContext(), QueueOutActivity.class);
+                        intent2.putExtra("sName", shedName);
+                        intent2.putExtra("sAdd", shedAdd);
+                        startActivity(intent2);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<Queue> call, @NonNull Throwable t) {
+                        Toast.makeText(QueueInActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }

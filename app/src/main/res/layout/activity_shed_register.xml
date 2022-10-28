@@ -19,7 +19,8 @@
         android:text="@string/fuel_it_smart"
         android:textColor="@color/design_default_color_primary_dark"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

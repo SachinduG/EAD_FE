@@ -13,7 +13,6 @@
     <string name="app_name">ead_fuel_app</string>
     <string name="app_badge">SmartFuel</string>
     <string name="fuel_it_smart">SmartFuel</string>
-    <string name="logo_sentence">Your Smart Filler</string>
     <string name="user_register">User Register</string>
     <string name="shed_register">Shed Register</string>
     <string name="nic_number">NIC Number</string>

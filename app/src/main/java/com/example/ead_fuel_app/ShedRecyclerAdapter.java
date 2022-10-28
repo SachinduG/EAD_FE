@@ -40,7 +40,7 @@ public class ShedRecyclerAdapter extends RecyclerView.Adapter<ShedViewHolder> {
         Shed shed = sheds.get(position);
 
         holder.shedName.setText(shed.getName());
-        holder.shedAddress.setText(shed.getAddress());
+        holder.shedCity.setText(shed.getAddress());
 
         holder.itemView.setOnClickListener(view -> shedSelectListener.onItemClicked(shed));
     }

@@ -42,9 +42,9 @@ public class ShedLoginActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_shed_login);
+
         sharedPreferences = getSharedPreferences("Fuels", Context.MODE_PRIVATE);
-
-
+        
         rNo = findViewById(R.id.regNo);
         psd = findViewById(R.id.psd);
         Button login = findViewById(R.id.signin1);
@@ -89,8 +89,8 @@ public class ShedLoginActivity extends AppCompatActivity implements View.OnClick
                         }else {
 
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                                assert response.body() != null;
-                                editor.putString("ShedSessionName", String.valueOf(response.body().getName()));
+                            assert response.body() != null;
+                            editor.putString("ShedSessionName", String.valueOf(response.body().getName()));
                             editor.putString("ShedSessionAddress", String.valueOf(response.body().getAddress()));
                             editor.apply();
 

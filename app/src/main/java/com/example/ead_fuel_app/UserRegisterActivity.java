@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class UserRegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText username, nic, address, vehicle_number, password, confirm_password;
+    private EditText name, nicNo, city, vehicleNo, psd, psd1;
     private String fuelType;
 
     @Override
@@ -39,12 +39,12 @@ public class UserRegisterActivity extends AppCompatActivity implements View.OnCl
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_user_register);
 
-        username = findViewById(R.id.username);
-        nic = findViewById(R.id.nic);
-        address = findViewById(R.id.address);
-        vehicle_number = findViewById(R.id.vehicle_number);
-        password = findViewById(R.id.password);
-        confirm_password = findViewById(R.id.confirm_password);
+        name = findViewById(R.id.username);
+        nicNo = findViewById(R.id.nic);
+        city = findViewById(R.id.address);
+        vehicleNo = findViewById(R.id.vehicle_number);
+        psd = findViewById(R.id.password);
+        psd1 = findViewById(R.id.confirm_password);
 
         TextView already = findViewById(R.id.already);
         already.setOnClickListener(this);
@@ -76,34 +76,34 @@ public class UserRegisterActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(getApplicationContext(), UserLoginActivity.class));
                 break;
             case R.id.signup:
-                String userName = username.getText().toString();
-                String nic_no = nic.getText().toString();
-                String add = address.getText().toString();
-                String vNum = vehicle_number.getText().toString();
-                String pass = password.getText().toString();
-                String repass = confirm_password.getText().toString();
+                String userName = name.getText().toString();
+                String nic_no = nicNo.getText().toString();
+                String add = city.getText().toString();
+                String vNum = vehicleNo.getText().toString();
+                String pass = psd.getText().toString();
+                String repass = psd1.getText().toString();
 
                 if (nic_no.isEmpty()) {
-                    nic.setError("NIC field cannot be empty!");
+                    nicNo.setError("NIC field cannot be empty!");
                 }
                 else if (userName.isEmpty()) {
-                    username.setError("Name field cannot be empty!");
+                    name.setError("Name field cannot be empty!");
                 }
                 else if (add.isEmpty()) {
-                    address.setError("City field cannot be empty!");
+                    city.setError("City field cannot be empty!");
                 }
                 else if (vNum.isEmpty()) {
-                    vehicle_number.setError("Vehicle Number field cannot be empty!");
+                    vehicleNo.setError("Vehicle Number field cannot be empty!");
                 }
                 else if (pass.isEmpty()) {
-                    password.setError("Password field cannot be empty!");
+                    psd.setError("Password field cannot be empty!");
                 }
                 else if (!pass.equals(repass)) {
-                    password.setError("Passwords are not matched!");
-                    confirm_password.setError("Passwords are not matched!");
+                    psd.setError("Passwords are not matched!");
+                    psd1.setError("Passwords are not matched!");
                 }
                 else if (pass.length() < 8 || pass.length() > 20) {
-                    password.setError("Password length should be between 8 and 20!");
+                    psd.setError("Password length should be between 8 and 20!");
                 }
                 else {
                     User user = new User(nic_no,userName,add,vNum,fuelType,pass);

@@ -25,4 +25,7 @@ public interface QueueService {
 
     @POST("api/v1/queue/exit/{id}")
     Call<Queue> leaveQueue(@Path("id") String id);
+
+    @POST("api/v1/queue/leave/{id}")
+    Call<Queue> leaveEarlyQueue(@Path("id") String id);
 }
