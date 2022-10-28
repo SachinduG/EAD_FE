@@ -36,7 +36,6 @@ public class ShedLoginActivity extends AppCompatActivity implements View.OnClick
     private ProgressBar progressBar;
     SharedPreferences sharedPreferences;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
