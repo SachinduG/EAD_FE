@@ -128,12 +128,14 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Petrol Arrival Updated!", Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
@@ -149,12 +151,14 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Petrol Finish Updated!", Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
@@ -170,12 +174,14 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Diesel Arrival Updated!", Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
@@ -191,12 +197,14 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Diesel Finish Updated!", Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            recreate();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
