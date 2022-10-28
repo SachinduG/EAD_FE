@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,7 +104,7 @@ public class QueueDetailsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<Queue> call, @NonNull Throwable t) {
-                    Log.d("FI", t.getMessage());
+                    Toast.makeText(QueueDetailsActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });
@@ -114,13 +113,27 @@ public class QueueDetailsActivity extends AppCompatActivity {
         this.shedRegNo.setText(shedRegNo);
         this.shedCity.setText(shedCity);
 
-        if (isDieselAvailable) {
-            fuelAvailability.setText("Available");
+        if(Objects.equals(fuelType, "Diesel")){
+            arrivalTime.setText(dieselArrivalTime);
+            finishTime.setText(dieselFinishTime);
+            queueLength.setText(diesellen);
+
+            if (isDieselAvailable) {
+                fuelAvailability.setText("Available");
+            } else {
+                fuelAvailability.setText("Not Available");
+            }
+
         } else {
-            fuelAvailability.setText("Not Available");
+            arrivalTime.setText(petrolArrivalTime);
+            finishTime.setText(petrolFinishTime);
+            queueLength.setText(petrollen);
+
+            if (isPetrolAvailable) {
+                fuelAvailability.setText("Available");
+            } else {
+                fuelAvailability.setText("Not Available");
+            }
         }
-        arrivalTime.setText(dieselArrivalTime);
-        finishTime.setText(dieselFinishTime);
-        queueLength.setText(diesellen);
     }
 }

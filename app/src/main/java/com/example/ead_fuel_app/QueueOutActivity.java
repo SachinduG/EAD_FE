@@ -44,7 +44,7 @@ public class QueueOutActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.home) {
-            startActivity(new Intent(QueueOutActivity.this, MainActivity.class));
+            startActivity(new Intent(QueueOutActivity.this, QueueListActivity.class));
         }
     }
 }

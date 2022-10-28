@@ -63,17 +63,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/green"
         android:padding="14dp"
         android:text="@string/diesel_arrived"
-        android:textSize="20sp"
         android:textColor="@color/white"
+        android:textSize="20sp"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/station_no"
-        app:layout_constraintVertical_bias="0.100000024"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiesel"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -81,19 +82,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:layout_marginTop="148dp"
-        android:textColor="@color/white"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/green"
         android:padding="14dp"
         android:text="@string/petrol_arrived"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.887"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diesel_arrive"
-        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -101,18 +100,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/red1"
         android:padding="14dp"
         android:text="@string/diesel_finished"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:cornerRadius="30dp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/petrol_arrive"
-        app:layout_constraintVertical_bias="0.35000002"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -120,19 +118,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/red1"
         android:padding="14dp"
         android:text="@string/petrol_finished"
-        android:textSize="20sp"
         android:textColor="@color/white"
+        android:textSize="20sp"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diesel_finish"
-        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".8" />
+
+    <TextView
+        android:id="@+id/tvDiesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:textColor="#FBFBFB"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="@string/diesel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/station_no" />
+
+    <TextView
+        android:id="@+id/tvPetrol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FBFBFB"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/petrol"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvDiesel"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

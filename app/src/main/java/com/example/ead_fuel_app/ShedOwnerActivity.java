@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class ShedOwnerActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView shedName, shedCity, shedNo;
+    private TextView shedName, shedCity, shedNo, petrol, diesel;
     String regNo;
     SharedPreferences sharedPreferences;
 
@@ -49,6 +49,8 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
         shedName = findViewById(R.id.station_name);
         shedCity = findViewById(R.id.station_address);
         shedNo = findViewById(R.id.station_no);
+        diesel = findViewById(R.id.tvDiesel);
+        petrol = findViewById(R.id.tvPetrol);
 
         String shedNme = sharedPreferences.getString("ShedSessionName", "No");
         String shedAddress = sharedPreferences.getString("ShedSessionAddress", "No");
@@ -70,6 +72,7 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
         Call<Shed> call = shedService.ShedById(regNo);
 
         call.enqueue(new Callback<Shed>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                 if (response.isSuccessful()) {
@@ -77,6 +80,20 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
 
                     assert shed != null;
                     String no = shed.getRegNo();
+                    boolean havePetrol = shed.isPetrolAvailable();
+                    boolean haveDiesel = shed.isDieselAvailable();
+
+                    if (haveDiesel){
+                        diesel.setText("Diesel Available");
+                    } else {
+                        diesel.setText("Diesel Not Available");
+                    }
+
+                    if (havePetrol){
+                        petrol.setText("Petrol Available");
+                    } else {
+                        petrol.setText("Petrol Not Available");
+                    }
 
                     shedNo.setText(no);
                     shedName.setText(shedNme);
