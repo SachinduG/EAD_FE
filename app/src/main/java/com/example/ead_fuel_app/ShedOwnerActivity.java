@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import retrofit2.Response;
 public class ShedOwnerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView shedName, shedCity, shedNo, petrol, diesel;
+    private ProgressBar progressBar;
     String regNo;
     SharedPreferences sharedPreferences;
 
@@ -51,6 +53,7 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
         shedNo = findViewById(R.id.station_no);
         diesel = findViewById(R.id.tvDiesel);
         petrol = findViewById(R.id.tvPetrol);
+        progressBar = findViewById(R.id.pB);
 
         String shedNme = sharedPreferences.getString("ShedSessionName", "No");
         String shedAddress = sharedPreferences.getString("ShedSessionAddress", "No");
@@ -115,73 +118,86 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.petrol_arrive:
+                progressBar.setVisibility(View.VISIBLE);
 
-                // update petrol arrival time
                 ShedService shedService = ServiceBuilder.buildService(ShedService.class);
+                // update petrol arrival time
                 Call<Shed> call = shedService.petrolArrived(regNo);
 
                     call.enqueue(new Callback<Shed>() {
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Petrol Arrival Updated!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
                 break;
             case R.id.petrol_finish:
+                progressBar.setVisibility(View.VISIBLE);
 
-                //update petrol finish time
                 shedService = ServiceBuilder.buildService(ShedService.class);
+                //update petrol finish time
                 call = shedService.petrolFinished(regNo);
 
                     call.enqueue(new Callback<Shed>() {
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Petrol Finish Updated!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
                 break;
             case R.id.diesel_arrive:
+                progressBar.setVisibility(View.VISIBLE);
 
-                // update diesel arrival time
                 shedService = ServiceBuilder.buildService(ShedService.class);
+                // update diesel arrival time
                 call = shedService.dieselArrived(regNo);
 
                     call.enqueue(new Callback<Shed>() {
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Diesel Arrival Updated!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
                 break;
             case R.id.diesel_finish:
-                //update diesel finish time
+                progressBar.setVisibility(View.VISIBLE);
+
                 shedService = ServiceBuilder.buildService(ShedService.class);
+                //update diesel finish time
                 call = shedService.dieselFinished(regNo);
 
                     call.enqueue(new Callback<Shed>() {
                         @Override
                         public void onResponse(@NonNull Call<Shed> call, @NonNull Response<Shed> response) {
                             Toast.makeText(ShedOwnerActivity.this, "Diesel Finish Updated!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
                             Toast.makeText(ShedOwnerActivity.this, ""+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
                 break;
