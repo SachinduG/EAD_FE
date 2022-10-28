@@ -67,8 +67,8 @@ public class QueueListActivity extends AppCompatActivity implements ShedSelectLi
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(QueueListActivity.this,R.layout.dropdown_menu,cities);
         autoCompleteTextViewCity.setAdapter(cityAdapter);
 
-        String [] fuelType = {"Petrol","Diesel"};
-        ArrayAdapter<String> fuelAdapter = new ArrayAdapter<>(QueueListActivity.this,R.layout.dropdown_menu,fuelType);
+        String [] fuelTypes = {"Petrol","Diesel"};
+        ArrayAdapter<String> fuelAdapter = new ArrayAdapter<>(QueueListActivity.this,R.layout.dropdown_menu,fuelTypes);
         autoCompleteTextViewFuel.setAdapter(fuelAdapter);
 
         autoCompleteTextViewCity.setOnItemClickListener((adapterView, view, i, l) -> {
