@@ -140,6 +140,7 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
                 break;
+
             case R.id.petrol_finish:
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -163,6 +164,7 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
                 break;
+
             case R.id.diesel_arrive:
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -186,6 +188,7 @@ public class ShedOwnerActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
                 break;
+                
             case R.id.diesel_finish:
                 progressBar.setVisibility(View.VISIBLE);
 
