@@ -5,6 +5,7 @@
 
 package com.example.ead_fuel_app;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -121,12 +122,16 @@ public class QueueListActivity extends AppCompatActivity implements ShedSelectLi
                         }};
                         shedRecyclerAdapter = new ShedRecyclerAdapter(getApplicationContext(), shdList, QueueListActivity.this);
                         recyclerView.setAdapter(shedRecyclerAdapter);
+
                     }
                 }
 
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onFailure(@NonNull Call<Shed> call, @NonNull Throwable t) {
-                    Toast.makeText(QueueListActivity.this, "Request Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QueueListActivity.this, "There are no available sheds!", Toast.LENGTH_SHORT).show();
+                    recyclerView.setAdapter(null);
+                    shedRecyclerAdapter.notifyDataSetChanged();
                 }
             });
         });
