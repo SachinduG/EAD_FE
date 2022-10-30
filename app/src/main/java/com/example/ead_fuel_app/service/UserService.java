@@ -18,9 +18,11 @@ import retrofit2.http.POST;
 
 public interface UserService {
 
+    // register the user
     @POST("api/v1/users/")
     Call<User> registerUser(@Body User user);
 
+    //login user with nic number and password
     @POST("api/v1/users/login/")
     @FormUrlEncoded
     @Headers({"Content-Type:application/x-www-form-urlencoded"})
